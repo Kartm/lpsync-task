@@ -1,17 +1,13 @@
-import db from "@src/db/db";
+import {pool} from "../db/db";
+import {House, HouseCreate} from "../models/house.model";
 
-const create = async () => {
-    db.serialize(() => {
-        db.run('CREATE TABLE lorem (info TEXT)');
+const create = async (newHouse: HouseCreate) => {
+    const text = 'INSERT INTO houses(name, roomsCount, location, builtAt) VALUES($1, $2, ST_SetSRID(ST_POINT($3, $4), $5) RETURNING *'
+    const values = [newHouse.name, newHouse.roomsCount, newHouse.location.latitude, newHouse.location.longitude, newHouse.builtAt]
 
-        const stmt = db.prepare('INSERT INTO lorem VALUES (?)')
+    const res = await pool.query(text, values)
 
-        for (let i = 0; i < 10; i++) {
-            stmt.run(`Ipsum ${i}`)
-        }
-
-        stmt.finalize()
-    });
+    return res.rows[0] as House;
 }
 
 export default {
@@ -20,20 +16,3 @@ export default {
         return Promise.resolve([]);
     }
 }
-
-// db.serialize(() => {
-//     db.run('CREATE TABLE lorem (info TEXT)')
-//     const stmt = db.prepare('INSERT INTO lorem VALUES (?)')
-//
-//     for (let i = 0; i < 10; i++) {
-//         stmt.run(`Ipsum ${i}`)
-//     }
-//
-//     stmt.finalize()
-//
-//     db.each('SELECT rowid AS id, info FROM lorem', (err, row) => {
-//         console.log(`${row.id}: ${row.info}`)
-//     })
-// })
-//
-// db.close()

@@ -1,4 +1,4 @@
-import houseRepository from '@src/repositories/house.repository';
+import houseRepository from '../repositories/house.repository';
 
 describe('HouseRepository', () => {
     it("creates a house", async () => {

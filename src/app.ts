@@ -1,17 +1,15 @@
-import express, {Request, Response} from "express";
+import * as express from 'express';
 
-import HouseRoutes from "./routes/house.route";
+import HouseRouter from './routes/house.route';
 
 const app = express();
 
-/* A middleware that parses the body of the request and makes it available in the req.body object. */
+// parses the body of the request and makes it available in the req.body object
 app.use(express.json());
+app.use(express.urlencoded({extended: true}))
 
-/* This is the root route. It is used to check if the server is running. */
-app.get("/", (req: Request, res: Response) => {
-  res.status(200).json({ alive: "True" });
-});
+app.use("/api/houses", HouseRouter);
 
-/* Telling the server to use the routes in the ProductRoutes file. */
-app.use("/api", HouseRoutes);
+// todo error handling
+
 export default app;

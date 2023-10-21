@@ -1,4 +1,8 @@
-const sqlite3 = require('sqlite3').verbose()
-const db = new sqlite3.Database(':memory:')
+import {Database} from 'sqlite3';
+const db = new Database(':memory:')
 
-export default db;
+import { Pool } from 'pg'
+
+const pool = new Pool()
+
+export {db, pool};

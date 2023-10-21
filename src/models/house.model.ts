@@ -1,5 +1,4 @@
-export type House = {
-  id: number;
+export type HouseCreate = {
   name: string;
   roomsCount: number;
   builtAt: string;
@@ -7,4 +6,12 @@ export type House = {
     latitude: number;
     longitude: number;
   }
+}
+
+export type House = HouseCreate & {
+  id: number;
+}
+
+export const isHouse = () => {
+  return true;
 }

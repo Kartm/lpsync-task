@@ -1,17 +1,16 @@
-import express from "express";
+import {Router} from "express";
+import jetValidator from 'jet-validator';
 
-import {getHouses} from "../controllers/house.controller";
+import houseController from "../controllers/house.controller";
+import {isHouse} from "../models/house.model";
+const validator = jetValidator();
 
-const router = express.Router();
+const router = Router();
 
-router.get("/houses", getHouses);
+router.get("/", validator(['name', isHouse]), houseController.getHouses);
 
-// router.get("/products/:id", getProduct);
-//
-// router.post("/products", createProduct);
-//
-// router.patch("/products/:id", updateProduct);
-//
-// router.delete("/products/:id", deleteProduct);
+router.post("/", validator(['name', isHouse]), houseController.createHouse);
+
+router.put("/:id", validator(['name', isHouse]), houseController.updateHouse);
 
 export default router;
