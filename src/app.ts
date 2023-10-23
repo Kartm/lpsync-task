@@ -1,6 +1,6 @@
-import * as express from 'express';
-
+import express from 'express';
 import HouseRouter from './routes/house.route';
+import cors from "cors";
 
 const app = express();
 
@@ -8,7 +8,10 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 
-app.use("/api/houses", HouseRouter);
+// temporarily enable all CORS requests
+app.use(cors())
+
+app.use("/api", HouseRouter);
 
 // todo error handling
 

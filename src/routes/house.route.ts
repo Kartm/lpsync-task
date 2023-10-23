@@ -7,10 +7,10 @@ const validator = jetValidator();
 
 const router = Router();
 
-router.get("/", validator(['name', isHouse]), houseController.getHouses);
+router.get("/houses", validator(['name', isHouse]), houseController.getHouses);
 
-router.post("/", validator(['name', isHouse]), houseController.createHouse);
+router.post("/houses", validator(['name', isHouse]), houseController.createHouse);
 
-router.put("/:id", validator(['name', isHouse]), houseController.updateHouse);
+router.put("/houses/:id", validator(['name', isHouse]), houseController.updateHouse);
 
 export default router;
