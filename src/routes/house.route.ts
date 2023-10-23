@@ -7,10 +7,12 @@ const validator = jetValidator();
 
 const router = Router();
 
+// todo missing validation
 router.get("/houses", validator(['name', isHouse]), houseController.getHouses);
 
+// todo missing validation
 router.post("/houses", validator(['name', isHouse]), houseController.createHouse);
 
-router.put("/houses/:id", validator(['name', isHouse]), houseController.updateHouse);
+// todo missing update
 
 export default router;

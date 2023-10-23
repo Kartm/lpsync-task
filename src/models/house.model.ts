@@ -12,6 +12,7 @@ export type House = HouseCreate & {
   id: number;
 }
 
+// todo validate fields and field types
 export const isHouse = () => {
   return true;
 }

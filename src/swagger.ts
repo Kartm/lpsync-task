@@ -16,4 +16,3 @@ const outputFile = './swagger-output.json';
 const endpointsFiles = ['./routes/house.route'];
 
 swaggerAutogen()(outputFile, endpointsFiles, doc);
-
